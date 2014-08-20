@@ -3,7 +3,7 @@ Contributors: Scorpionsoft
 Donate Link: http://www.davidsuzuki.org/donate/
 Tags: authentication,AuthAnvil,OTP,One-Time Password,token,password,security,login
 Requires at least: 3.0.3
-Tested up to: 3.0.4
+Tested up to: 3.9.2
 Stable tag: 1.0
 
 Two-Factor Authentication login security for your WordPress site using AuthAnvil.
@@ -24,7 +24,7 @@ The requirement to use AuthAnvil is set on a per-user basis, with the default se
 
 = Where can I find out more information about AuthAnvil? =
 
-Learn about AuthAnvil at http://www.scorpionsoft.com/tour/intro
+Learn about AuthAnvil at http://www.scorpionsoft.com
 
 = Are there any special requirements for my WordPress/PHP installation? =
 
