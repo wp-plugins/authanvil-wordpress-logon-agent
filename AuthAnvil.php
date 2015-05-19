@@ -4,7 +4,7 @@ Plugin Name: AuthAnvil WordPress Logon Agent
 Plugin URI: http://www.scorpionsoft.com/docs/authanvil/wordpress/
 Description: Two-Factor Authentication login security for your WordPress site using AuthAnvil.
 Author: Scorpion Software Corp.
-Version: 1.0
+Version: 1.2
 Author URI: http://www.scorpionsoft.com
 Compatibility : WordPress 3.0.3
 
@@ -34,8 +34,8 @@ Compatibility : WordPress 3.0.3
  */
 function authanvil_loginform() {
   echo "<p>";
-  echo "<label>".__('AuthAnvil Passcode','authanvil')."<br />";
-  echo "<input type=\"password\" name=\"otp\" id=\"user_email\" class=\"input\" value=\"\" size=\"20\" tabindex=\"25\"/></label>";
+  echo "<label>".__('AuthAnvil Passcode','authanvil', 'authanvil-wordpress-logon-agent')."<br />";
+  echo "<input type=\"password\" name=\"otp\" id=\"user_email\" class=\"input\" value=\"\" size=\"20\"/></label>";
   echo "</p>";
   echo '<style type="text/css">.forgetmenot { display:none; }</style>' . "\n";
 }
@@ -45,7 +45,7 @@ function authanvil_loginform() {
  */
 function authanvil_loginform_sasinfomissing() {
   echo "<p style=\"font-size: 12px;width: 97%;padding: 3px;\">";
-  echo __('AuthAnvil authentication has been disabled, the AuthAnvil SAS URL or Site ID hasn\'t been set up.','authanvil');
+  echo __('AuthAnvil authentication has been disabled, the AuthAnvil SAS URL or Site ID hasn\'t been set up.','authanvil', 'authanvil-wordpress-logon-agent');
   echo "</p><br/>";
 }
 
@@ -55,7 +55,7 @@ function authanvil_loginform_sasinfomissing() {
 function authanvil_options_page() {	
 ?>    
 <div class="wrap">
-	<h2><?php _e('AuthAnvil Plugin Options','authanvil');?></h2>
+	<h2><?php _e('AuthAnvil Plugin Options','authanvil', 'authanvil-wordpress-logon-agent');?></h2>
 	<form name="authanvil" method="post" action="options.php">
 		<?php wp_nonce_field('update-options'); ?>
 		<input type="hidden" name="action" value="update" />
@@ -63,16 +63,16 @@ function authanvil_options_page() {
 	    <table class="form-table">
 	    	<?php PHP4_Check();?>
 			<tr valign="top">
-				<th scope="row"><label for="authanvil_sas_url"><?php _e('AuthAnvil SAS URL','authanvil');?></label></th>
+				<th scope="row"><label for="authanvil_sas_url"><?php _e('AuthAnvil SAS URL','authanvil', 'authanvil-wordpress-logon-agent');?></label></th>
 				<td><input name="authanvil_sas_url" type="text" id="authanvil_sas_url" class="code" value="<?php echo get_option('authanvil_sas_url') ?>" size="60" /><br /></td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><label for="authanvil_site_id"><?php _e('AuthAnvil Site ID','authanvil');?></label></th>
+				<th scope="row"><label for="authanvil_site_id"><?php _e('AuthAnvil Site ID','authanvil', 'authanvil-wordpress-logon-agent');?></label></th>
 				<td><input name="authanvil_site_id" type="text" id="authanvil_site_id" class="code" value="<?php echo get_option('authanvil_site_id'); ?>" size="5" /><br /></td>
 			</tr>
 		</table>
 		<p class="submit">
-			<input type="submit" name="Submit" value="<?php _e('Save Changes', 'authanvil' ) ?>" />
+			<input type="submit" name="Submit" value="<?php _e('Save Changes', 'authanvil' , 'authanvil-wordpress-logon-agent') ?>" />
 		</p>
 	</form>
 </div>
@@ -85,7 +85,7 @@ function authanvil_options_page() {
  */
 function PHP4_Check($globaloptions=true) {
 	if (version_compare(PHP_VERSION, '5.0.0', '<')){
-		$errormessage=__('WARNING: You appear to be using PHP4, PHP5 or newer is required for the AuthAnvil plugin to work.','authanvil');
+		$errormessage=__('WARNING: You appear to be using PHP4, PHP5 or newer is required for the AuthAnvil plugin to work.','authanvil', 'authanvil-wordpress-logon-agent');
 		if ($globaloptions) {
 			echo "<tr valign=\"top\">";
 			echo "<th scope=\"row\">&nbsp;</th>";
@@ -122,7 +122,7 @@ function authanvil_check_otp($user) {
 
 	if (!empty($authanvilserver) && $authanvilserver!='disabled' && empty($_POST['otp'])) {
 		$error=new WP_Error();
-		$error->add('empty_authanvilotp', __('<strong>ERROR</strong>: You must enter an AuthAnvil passcode to log in.','authanvil'));
+		$error->add('empty_authanvilotp', __('<strong>ERROR</strong>: You must enter an AuthAnvil passcode to log in.','authanvil', 'authanvil-wordpress-logon-agent'));
 		return $error;
 	}
 
@@ -132,7 +132,7 @@ function authanvil_check_otp($user) {
 		// is OTP valid ?
 		if (!authanvil_verify_otp($user->user_login,$otp,$authanvil_sas_url,$authanvil_site_id)) {
 			$error=new WP_Error();
-			$error->add('invalid_authanvilotp', __('<strong>ERROR</strong>: Invalid AuthAnvil Passcode.','authanvil'));
+			$error->add('invalid_authanvilotp', __('<strong>ERROR</strong>: Invalid AuthAnvil Passcode.','authanvil', 'authanvil-wordpress-logon-agent'));
 			return $error;
 		}
 	}
@@ -149,13 +149,13 @@ function authanvil_profile_personal_options() {
 	
 	// Only allow the user to edit their own AuthAnvil settings if they have permissions to manage users
 	if (current_user_can( 'edit_users' )) {
-		echo "<h3>".__('AuthAnvil Settings','authanvil')."</h3>";
+		echo "<h3>".__('AuthAnvil Settings','authanvil', 'authanvil-wordpress-logon-agent')."</h3>";
 
 		echo '<table class="form-table">';
 		echo '<tbody>';
 		PHP4_Check(false);
 		echo '<tr>';
-		echo '<th scope="row">'.__('Require Strong Authentication','authanvil').'</th>';
+		echo '<th scope="row">'.__('Require Strong Authentication','authanvil', 'authanvil-wordpress-logon-agent').'</th>';
 		echo '<td>';
 
 		echo '<div><input name="authanvil_server" id="authanvilserver_enabled" value="enabled" type="radio"';
@@ -163,14 +163,14 @@ function authanvil_profile_personal_options() {
 			echo ' checked="checked"';
 		}
 		echo '/>';
-		echo '<label for="authanvilserver_enabled"> '.__('Yes','authanvil').'</label>&nbsp;&nbsp;&nbsp;';
+		echo '<label for="authanvilserver_enabled"> '.__('Yes','authanvil', 'authanvil-wordpress-logon-agent').'</label>&nbsp;&nbsp;&nbsp;';
 		
 		echo '<input name="authanvil_server" id="authanvilserver_disabled" value="disabled" type="radio"';
 		if ($authanvilserver == 'disabled' || $authanvilserver=='') {
 			echo ' checked="checked"';
 		}
 		echo '/>';
-		echo '<label for="authanvilserver_disabled"> '.__('No','authanvil').'</label>';
+		echo '<label for="authanvilserver_disabled"> '.__('No','authanvil', 'authanvil-wordpress-logon-agent').'</label>';
 		echo '</div>';
 		
 		echo '</td>';
@@ -186,13 +186,13 @@ function authanvil_edit_user_profile() {
 	global $user_id;
 	$authanvilserver=get_user_option('authanvil_server',$user_id);
 
-	echo "<h3>".__('AuthAnvil Settings','authanvil')."</h3>";
+	echo "<h3>".__('AuthAnvil Settings','authanvil', 'authanvil-wordpress-logon-agent')."</h3>";
 
 	echo '<table class="form-table">';
 	echo '<tbody>';
 	PHP4_Check(false);
 	echo '<tr>';
-	echo '<th scope="row">'.__('Require Strong Authentication','authanvil').'</th>';
+	echo '<th scope="row">'.__('Require Strong Authentication','authanvil', 'authanvil-wordpress-logon-agent').'</th>';
 	echo '<td>';
 
 	echo '<div><input name="authanvil_server" id="authanvilserver_enabled" value="enabled" type="radio"';
@@ -200,14 +200,14 @@ function authanvil_edit_user_profile() {
 		echo ' checked="checked"';
 	}
 	echo '/>';
-	echo '<label for="authanvilserver_enabled"> '.__('Yes','authanvil').'</label>&nbsp;&nbsp;&nbsp;';
+	echo '<label for="authanvilserver_enabled"> '.__('Yes','authanvil', 'authanvil-wordpress-logon-agent').'</label>&nbsp;&nbsp;&nbsp;';
 	
 	echo '<input name="authanvil_server" id="authanvilserver_disabled" value="disabled" type="radio"';
 	if ($authanvilserver == 'disabled' || $authanvilserver=='') {
 		echo ' checked="checked"';
 	}
 	echo '/>';
-	echo '<label for="authanvilserver_disabled"> '.__('No','authanvil').'</label>';
+	echo '<label for="authanvilserver_disabled"> '.__('No','authanvil', 'authanvil-wordpress-logon-agent').'</label>';
 	echo '</div>';
 	
 	echo '</td>';
