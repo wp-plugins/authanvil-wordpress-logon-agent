@@ -35,7 +35,7 @@ Compatibility : WordPress 3.0.3
 function authanvil_loginform() {
   echo "<p>";
   echo "<label>".__('AuthAnvil Passcode','authanvil')."<br />";
-  echo "<input type=\"password\" name=\"otp\" id=\"user_email\" class=\"input\" value=\"\" size=\"20\" tabindex=\"25\"/></label>";
+  echo "<input type=\"password\" name=\"otp\" id=\"user_email\" class=\"input\" value=\"\" size=\"20\"/></label>";
   echo "</p>";
   echo '<style type="text/css">.forgetmenot { display:none; }</style>' . "\n";
 }
