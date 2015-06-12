@@ -12,7 +12,7 @@ Compatibility : WordPress 3.0.3
 	Based on the Yubikey-Plugin by Henrik Schack (http://henrik.schack.dk/yubikey-plugin/)
 ----------------------------------------------------------------------------
 
-    Copyright 2011  Scorpion Software Corp.  (http://www.scorpionsoft.com)
+    Copyright 2015  Scorpion Software Corp.  (http://www.scorpionsoft.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
