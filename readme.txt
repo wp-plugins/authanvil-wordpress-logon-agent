@@ -49,4 +49,4 @@ No, since AuthAnvil authentication is enabled on a per user basis, you can requi
 == Upgrade Notice ==
 
 = 1.1 =
-Updated compat info
+Updated version info =TabIndexing modified
