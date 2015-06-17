@@ -4,7 +4,7 @@ Donate Link: http://www.davidsuzuki.org/donate/
 Tags: authentication,AuthAnvil,OTP,One-Time Password,token,password,security,login
 Requires at least: 3.0.3
 Tested up to: 3.9.2
-Stable tag: 1.1
+Stable tag: 1.2
 
 Two-Factor Authentication login security for your WordPress site using AuthAnvil.
 
@@ -48,5 +48,5 @@ No, since AuthAnvil authentication is enabled on a per user basis, you can requi
 
 == Upgrade Notice ==
 
-= 1.1 =
+= 1.2 =
 Updated compat info
